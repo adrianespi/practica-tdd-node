@@ -1,24 +1,13 @@
-function esPinValido(pin) {
-    if (pin === null || pin === undefined || pin === '') {
+export function esPinValido(pin) {
+    if (pin === null || pin === undefined) {
       return false;
     }
   
     const pinStr = String(pin);
   
-    if (pinStr.length !== 4 && pinStr.length !== 6) {
-      return false;
-    }
-
-    if (!/^\d+$/.test(pinStr)) {
-      return false;
-    }
+    const esFormatoValido = /^(\d{4}|\d{6})$/.test(pinStr);
+    
+    const todosIguales = /^(\d)\1+$/.test(pinStr);
   
-    const allSame = pinStr.split('').every(digit => digit === pinStr[0]);
-    if (allSame) {
-      return false;
-    }
-  
-    return true;
+    return esFormatoValido && !todosIguales;
   }
-  
-  export { esPinValido };
