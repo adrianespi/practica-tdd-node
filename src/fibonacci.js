@@ -1,25 +1,19 @@
-function fibonacci(n) {
+export function fibonacci(n) {
   if (n < 0) {
     throw new RangeError("solo números enteros ≥ 0");
   }
-  if (n === 0) {
-    return 0;
-  }
-  if (n === 1) {
-    return 1;
+  if (n <= 1) {
+    return n;
   }
 
-  let a = 0;
-  let b = 1;
-  let resultado = 0;
+  let prev = 0;
+  let current = 1;
 
   for (let i = 2; i <= n; i++) {
-    resultado = a + b;
-    a = b;
-    b = resultado;
+    const next = prev + current;
+    prev = current;
+    current = next;
   }
 
-  return resultado;
+  return current;
 }
-
-export { fibonacci };
