@@ -1,0 +1,25 @@
+name: ci #Pongo comentario, para tratar de solucionar problema de usuarios al realizar los commits.
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install deps (lockfile)
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test
